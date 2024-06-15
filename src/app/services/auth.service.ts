@@ -87,7 +87,8 @@ getIdforfrontend() : any {
 
 
 getById(id: any) {
-  return this.http.get('http://localhost:8081/user/getbyid/' + id);
+  console.log(id);
+  return this.http.get(`http://localhost:8081/user/getbyid/${id}`);
 }
 
 // Update user profile

@@ -17,11 +17,11 @@ export class AuthorComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = this._auth.getIdforfrontend(); 
-    if (userId) {
+    if (userId) { 
       this._auth.getById(userId)
         .subscribe(
-          (data) => {
-            this.author = data; 
+          (res) => { 
+            this.author = res; 
           },
           (error) => {
             console.error('Error fetching user data:', error);

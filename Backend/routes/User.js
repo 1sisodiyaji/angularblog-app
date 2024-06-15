@@ -141,13 +141,13 @@ router.get("/getbyid/:id", async (req, res) => {
         const user = await User.findById(req.params.id);
 
         if (!user) {
-            return res.status(404).send("User not found");
+            return  res.status(404).json({ message: 'User not found' });
         }
-
-        res.status(200).json(user);
+        console.log(user);
+        return  res.status(200).json(user);
     } catch (err) {
         console.error("Failed to fetch user:", err.message);
-        res.status(500).send("Failed to fetch user");
+        return  res.status(500).json({ message: 'Failed to fetch user' });
     }
 });
 
