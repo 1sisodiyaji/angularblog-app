@@ -1,0 +1,24 @@
+<div class="container mt-4 py-lg-5 py-2">
+    <h2 class="text-center text-warning">Send Email</h2>
+<div class="row py-lg-5 py-2">
+  <div class="col-lg-6 col-12 text-center">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEXM6LSVgCbNtS9dzdYbrdh0uyhVAVsO6Hug&s" alt="mail image" class="img-fluid ">
+  </div>
+  <div class="col-lg-6 col-12">
+    <form (ngSubmit)="sendEmail()">
+      <div class="form-group m-1">
+        <input [(ngModel)]="email.to" name="to" type="email" class="form-control" placeholder="Recipient Email" required>
+      </div>
+      <div class="form-group m-1">
+        <input [(ngModel)]="email.subject" name="subject" type="text" class="form-control" placeholder="Subject" required>
+      </div>
+      <div class="form-group m-1">
+        <textarea [(ngModel)]="email.message" name="message" class="form-control" placeholder="Message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-dark form-control m-1">Send Email</button>
+    </form>
+  </div>
+</div>
+   
+  </div>
+  
