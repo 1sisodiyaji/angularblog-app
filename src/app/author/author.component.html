@@ -12,6 +12,7 @@
                 <p>{{author.about}}</p>
               </div>
               <div class="btn btn-warning" [routerLink]="['/create']" >Create new article</div>
+              <div class="btn btn-primary mx-3" [routerLink]="['/edit-profile',author.id]">Edit Profile</div>
             </div>
           </div>
         </div>
@@ -54,6 +55,12 @@
                 </ul>
               </li>
             </ul>
+
+
+            <div class="my-3">
+              <button class="btn btn-warning text-capitalize " [routerLink]="['/edit-blog',item._id]"  >Edit</button>
+              <button class="btn btn-danger mx-3 text-capitalize " (click) = "deleteArticle(item._id)">Delete</button>
+            </div>
           </div>
         </article>
       </div>

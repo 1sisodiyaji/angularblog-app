@@ -1,0 +1,28 @@
+<section class="page-header section-sm">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="row g-4 g-lg-5 text-center text-lg-start justify-content-center justify-content-lg-start">
+            <div class="col-lg-3 col-md-4 col-sm-5 col-6">
+              <img class="img-fluid rounded" [src]="getImageUrl()" alt="User image" width="250" height="250">
+              <input type="file" (change)="onImageSelected($event)" class="form-control mt-3" accept="image/*">
+            </div>
+            <div class="col-lg-9 col-md-12">
+              <h1 class="h3 text-warning mb-3">
+                <input type="text" class="form-control" [(ngModel)]="userData.name" placeholder="Name">
+                <input type="text" class="form-control my-2" [(ngModel)]="userData.lastname" placeholder="Lastname">
+              </h1>
+              <div class="content">
+                <textarea class="form-control" [(ngModel)]="userData.about" placeholder="About"></textarea>
+              </div>
+              <div>
+                <button class="btn btn-warning mt-3" (click)="updateProfile()">Update</button>
+                <button class="btn btn-danger mt-3 mx-3" (click)="deleteProfile()">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

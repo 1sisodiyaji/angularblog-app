@@ -19,6 +19,8 @@ import { BlogListComponent } from './home/blog-list/blog-list.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SendEmailComponent } from './send-email/send-email.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { EditBlogComponent } from './edit-blog/edit-blog.component'; 
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { SendEmailComponent } from './send-email/send-email.component';
     CoverComponent,
     BlogListComponent,
     SendEmailComponent,
+    EditProfileComponent,
+    EditBlogComponent
   ],
   imports: [
     BrowserModule,

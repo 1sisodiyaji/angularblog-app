@@ -11,6 +11,8 @@ import { LoginComponent } from './login/login.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthGuard } from './services/auth.guard';
 import { SendEmailComponent } from './send-email/send-email.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component'; 
+import { EditBlogComponent } from './edit-blog/edit-blog.component';
 
 const routes: Routes = [
 
@@ -20,6 +22,8 @@ const routes: Routes = [
 {path : 'article/:id' , component : DetailsComponent},
 {path : 'create' ,canActivate :[AuthGuard], component : CreatearticleComponent},
 {path : 'about' , component : AboutComponent},
+{path : 'edit-profile/:id' , component : EditProfileComponent}, 
+{path : 'edit-blog/:id' , component : EditBlogComponent}, 
 {path : 'send-mail' , component : SendEmailComponent},
 
 {path : 'privacy' , component : PrivacyComponent},

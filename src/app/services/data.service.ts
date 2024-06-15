@@ -13,7 +13,7 @@ export class DataService {
   fetchAll = 'http://localhost:8081/articles/all';
   fetchbyIdAuthor = 'http://localhost:8081/articles/getbyidAuthor/';
   fetchbyId = 'http://localhost:8081/articles/getbyid/';
-  mailurl = 'http://localhost:8081/send-email';
+  mailurl = 'http://localhost:8081/send-email'; 
 
   create(article: any) {
     return this.http.post(this.createurl, article);
@@ -35,4 +35,15 @@ export class DataService {
     return this.http.post<any>(this.mailurl, emailData);
   }
 
+  deleteArticle(id: string): Observable<any> {
+    console.log(id);
+    return this.http.delete(`http://localhost:8081/user/delete/${id}`);
+  }
+
+ 
+  
+  updateArticle(id: string, formData: FormData): Observable<any> {
+    return this.http.put<any>(`http://localhost:8081/articles/update/${id}`, formData)
+       
+  }
 }

@@ -9,17 +9,20 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-
   author = {
     email: '',
     password: ''
-  }
+  };
+
+  errorMessage: string | null = null;
+
   constructor(private _auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   token: any;
+
   login() {
     this._auth.login(this.author)
       .subscribe(
@@ -30,8 +33,9 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/home']);
         },
         err => {
-          console.log(err)
+          console.log(err);
+          this.errorMessage = err.error.message || 'An error occurred during login. Please try again.'; // Set the error message
         }
-      )
+      );
   }
 }

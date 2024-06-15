@@ -11,16 +11,23 @@ export class AuthService {
   private registerUrl = 'http://localhost:8081/user/register';
   constructor(private http: HttpClient) { }
 
-  register(userData: FormData): Observable<HttpResponse<any>> {
-    return this.http.post<any>(this.registerUrl, userData, { observe: 'response' })
+  register(authorData: FormData): Observable<any> {
+    return this.http.post<any>(this.registerUrl, authorData, { observe: 'response' })
       .pipe(
         catchError(this.handleError)
       );
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.error('Registration failed', error);
-    return throwError('Registration failed. Please try again later.');
+    let errorMessage = 'Unknown error!';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side errors
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // Server-side errors
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(errorMessage);
   }
 
 
@@ -37,31 +44,67 @@ isLoggedIn(): boolean {
 
 getAuthorDataFromToken(): any {
   const token = localStorage.getItem('token');
-  console.log(token);
-  if(token){
-  try {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    const data = JSON.parse(jsonPayload);
-    console.log(data);
-    return data;
-  } catch (e) {
-    console.error('Failed to decode token', e);
+  if (token) {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      const data = JSON.parse(jsonPayload); 
+      return data;  
+    } catch (e) {
+      console.error('Failed to decode token', e);
+      return null;
+    }
+  } else {
+    console.log("No token found");
     return null;
   }
-}else{
-  console.log("no token found");  
 }
+
+getIdforfrontend() : any {
+  const token = localStorage.getItem('token');
+  console.log(token);
+  if (token) {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+      const data = JSON.parse(jsonPayload); 
+      return data.id;  
+    } catch (e) {
+      console.error('Failed to decode token', e);
+      return null;
+    }
+  } else {
+    console.log("No token found");
+    return null;
+  }
 }
 
 
-getById(id:any){
-  return this.http.get('http://localhost:8081/user/getbyid/'+ id)
+getById(id: any) {
+  return this.http.get('http://localhost:8081/user/getbyid/' + id);
 }
 
+// Update user profile
+updateProfile(id: string, formData: FormData): Observable<any> {
+  const url = `http://localhost:8081/user/update/${id}`;  
+  return this.http.put<any>(url, formData)
+    .pipe(
+      catchError(this.handleError) 
+    );
+}
+deleteProfile(userId: string): Observable<any> {
+  return this.http.delete(`http://localhost:8081/user/delete/${userId}`);
+}
+
+
+
+ 
 
 
 }

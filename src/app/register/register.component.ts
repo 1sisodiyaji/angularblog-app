@@ -15,10 +15,11 @@ export class RegisterComponent implements OnInit {
     email: '',
     password: '',
     about: ''
-  }
+  };
 
   image: any;
-  
+  errorMessage: string | null = null;
+
   constructor(private _auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -36,20 +37,23 @@ export class RegisterComponent implements OnInit {
     fd.append('email', this.author.email);
     fd.append('password', this.author.password);
     fd.append('about', this.author.about);
-    fd.append('image', this.image); 
+    fd.append('image', this.image);
 
     this._auth.register(fd)
       .subscribe(
         response => {
+          console.log('Registration response:', response);
           if (response.status === 201) {
-            console.log(response.body.message);  
+            console.log(response.body.message);
             this.router.navigate(['/login']);
           } else {
             console.log('Unexpected response status:', response.status);
+            this.errorMessage = 'Unexpected response status: ' + response.status;
           }
         },
         error => {
           console.log('Registration error:', error);
+          this.errorMessage = error.error.message || 'An error occurred during registration. Please try again.';
         }
       );
   }
