@@ -48,7 +48,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   getImageUrl(): string {
-    return this.userData.image ? `assets/user/${this.userData.image}` : 'assets/user/default-profile-image.png';
+    return this.userData.image ? `${this.userData.image}` : 'defaultImage';
   }
 
   onImageSelected(event: any): void {
@@ -63,6 +63,7 @@ export class EditProfileComponent implements OnInit {
     formData.append('about', this.userData.about);
     if (this.selectedImage) {
       formData.append('image', this.selectedImage);
+      console.log(this.selectedImage);
     }
 
     this.authService.updateProfile(userId , formData)

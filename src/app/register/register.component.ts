@@ -31,9 +31,42 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    if (!this.author.name) {
+      this.errorMessage = 'Name is required.';
+      return;
+    }
+    
+    if (!this.author.email) {
+      this.errorMessage = 'Email is required.';
+      return;
+    }
+    
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.author.email)) {
+      this.errorMessage = 'Invalid email format.';
+      return;
+    }
+    
+    if (!this.author.password) {
+      this.errorMessage = 'Password is required.';
+      return;
+    }
+
+    if (!this.image) {
+      this.errorMessage = 'Image is required.';
+      return;
+    }
+  
+    if (!this.author.about) {
+      this.errorMessage = 'About is required.';
+      return;
+    }
+    
+  
+  
     let fd = new FormData();
     fd.append('name', this.author.name);
-    fd.append('lastname', this.author.lastname);
     fd.append('email', this.author.email);
     fd.append('password', this.author.password);
     fd.append('about', this.author.about);
@@ -43,12 +76,13 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         response => {
           console.log('Registration response:', response);
-          if (response.status === 201) {
+          if (response.status === 200) {
             console.log(response.body.message);
-            this.router.navigate(['/login']);
+            localStorage.setItem('token', response.body.token);
+            this.router.navigate(['/home']);
           } else {
             console.log('Unexpected response status:', response.status);
-            this.errorMessage = 'Unexpected response status: ' + response.status;
+            this.errorMessage =   response.body.message;
           }
         },
         error => {

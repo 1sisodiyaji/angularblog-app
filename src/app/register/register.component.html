@@ -1,21 +1,23 @@
 <div class="container mt-5 py-lg-5 py-2">
-    <h2 class="text-center text-warning">Create author account</h2>
+ <div class="text-center my-3">
+  <img class="img-fluid " width="55" height="55" src="assets/assets/images/logo.png" alt="Codesaarthi">
+</div>
+    <h2 class="text-center text-dark">Create author account</h2>
   
-    <div class="col-6 mx-auto">
+    <div class="col-lg-6 col-12 mx-auto">
       <div *ngIf="errorMessage" class="alert alert-danger mt-2">
         {{ errorMessage }}
       </div>
   
       <input [(ngModel)]="author.name" type="text" class="form-control m-1" placeholder="name">
-      <input [(ngModel)]="author.lastname" type="text" class="form-control m-1" placeholder="lastname">
-      <input [(ngModel)]="author.email" type="text" class="form-control m-1" placeholder="email">
+      <input [(ngModel)]="author.email" type="email" class="form-control m-1" placeholder="email">
       <input [(ngModel)]="author.password" type="password" class="form-control m-1" placeholder="password">
-      <input type="file" (change)="select($event)" class="form-control m-1" placeholder="image">
+      <input type="file" accept="image/*" (change)="select($event)" class="form-control m-1" placeholder="image">
       <textarea [(ngModel)]="author.about" cols="30" rows="4" placeholder="about" class="form-control m-1"></textarea>
   
-      <button (click)="register()" class="btn btn-warning form-control m-1">Register</button>
+      <button (click)="register()" class="btn btn-dark form-control m-1">Register</button>
   
-      <p class="my-3">Already have an account <a [routerLink]="['/login']" class="text-warning">Sign up</a></p>
+      <p class="my-3">Already have an account <a [routerLink]="['/login']" class="text-dark text-decoration-underline"> Sign in</a></p>
     </div>
   </div>
   

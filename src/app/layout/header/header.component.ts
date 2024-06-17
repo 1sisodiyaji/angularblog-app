@@ -15,13 +15,8 @@ export class HeaderComponent implements OnInit {
     if (this.authService.isLoggedIn()) {
       const token = localStorage.getItem('token');
       if (token) {
-        const authorData = this.authService.getAuthorDataFromToken(); 
-        if (authorData && authorData.id) {
-          this.authorId = authorData.id;
-          const ID = this.authorId;  
-        } else {
-          console.error('Invalid token or missing author ID');
-        }
+        const authorData = this.authService.getIdforfrontend(); 
+         this.authorId = authorData;
       }
     }
   }

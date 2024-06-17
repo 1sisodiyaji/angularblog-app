@@ -27,13 +27,22 @@ export class EditBlogComponent implements OnInit {
 
   ngOnInit(): void {
     const articleId = this.route.snapshot.paramMap.get('id');
+    console.log(articleId);
     if (articleId) {
-      this.dataService.getArticleById(articleId).subscribe(
-        (data) => {
-          this.article = data;
+      this.dataService.getArticleById(articleId)
+      .subscribe(
+        response => {
+          console.log('Registration response:', response);
+          if (response.status === 200) {
+            console.log(response.body);
+            this.article = response.body;
+          } else {
+            console.log('Unexpected response status:', response.status);
+            this.errorMessage =   response.body.message;
+          }
         },
-        (error) => {
-          console.error('Error fetching article:', error);
+        error => {
+          console.log('Fetching error:', error);
         }
       );
     }

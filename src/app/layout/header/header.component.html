@@ -1,49 +1,40 @@
-<div class="header-height-fix"></div>
-<header class="header-nav" style="background-color: #1e1e1e;" >
+<div class="container-fluid">
   <div class="container">
     <div class="row">
       <div class="col-12">
         <nav class="navbar navbar-expand-lg  p-0">
           <!-- logo -->
           <a class="navbar-brand font-weight-bold mb-0" [routerLink]="['/home']"  title="Codesaarthi">
-            <img class="img-fluid" width="110" height="35" src="assets/assets/images/logo.png" alt="Qurno">
+            <img class="img-fluid" width="35" height="35" src="assets/assets/images/logo.png" alt="Codesaarthi">
           </a>
 
-          <button class="search-toggle d-inline-block d-lg-none ms-auto me-1 me-sm-3" data-toggle="search" aria-label="Search Toggle">
-            <span>Search</span>
-            <svg width="22" height="22" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15.5 15.5L19 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M5 11C5 14.3137 7.68629 17 11 17C12.6597 17 14.1621 16.3261 15.2483 15.237C16.3308 14.1517 17 12.654 17 11C17 7.68629 14.3137 5 11 5C7.68629 5 5 7.68629 5 11Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navHeader" aria-controls="navHeader" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="ti ti-menu-2 d-inline"></i>
-            <i class="ti ti-x d-none"></i>
+            <i class="ti ti-menu-2 d-inline text-warning"></i>
+            <i class="ti ti-x d-none text-danger"></i>
           </button>
 
-          <div class="collapse navbar-collapse" id="navHeader">
+          <div class="collapse navbar-collapse p-2" id="navHeader">
             <ul class="navbar-nav mx-auto" >
               <li class="nav-item active">
-                <a class="nav-link " style="color: white !important;" [routerLink]="['/home']">Home</a>
+                <a class="nav-link " style="color: black !important;" [routerLink]="['/home']">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color: white !important;" [routerLink]="['/about']">About</a>
+                <a class="nav-link" style="color: black !important;" [routerLink]="['/about']">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color: white !important;" [routerLink]="['/privacy']">Privacy</a>
+                <a class="nav-link" style="color: black !important;" [routerLink]="['/privacy']">Privacy</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color: white !important;" [routerLink]="['/send-mail']">Contact</a>
+                <a class="nav-link" style="color: black !important;" [routerLink]="['/send-mail']">Contact</a>
               </li>
               <li class="nav-item"  *ngIf="authService.isLoggedIn() == false">
-                <a class="nav-link" style="color: white !important;" [routerLink]="['/register']">Register</a>
+                <a class="nav-link" style="color: black !important;" [routerLink]="['/register']">Register</a>
               </li>
               <li class="nav-item" *ngIf="authService.isLoggedIn() === true">
-                <a class="nav-link" style="color: white !important;" [routerLink]="['/author', authorId]">My account</a>
+                <a class="nav-link" style="color: black !important;" [routerLink]="['/author/', authorId]">My account</a>
               </li>
               <li class="nav-item" *ngIf="authService.isLoggedIn() == true">
-                <button class="btn btn-link nav-link" (click)="logout()" style="color: white !important;">Logout</button>
+                <a class="nav-link" (click)="logout()" style="color: black !important;">Logout</a>
               </li>
             </ul>
           </div>
@@ -51,4 +42,3 @@
       </div>
     </div>
   </div>
-</header>

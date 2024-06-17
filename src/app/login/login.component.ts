@@ -24,17 +24,39 @@ export class LoginComponent implements OnInit {
   token: any;
 
   login() {
+    if (!this.author.email) {
+      this.errorMessage = 'Email is required.';
+      return;
+    }
+    
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.author.email)) {
+      this.errorMessage = 'Invalid email format.';
+      return;
+    }
+    
+    if (!this.author.password) {
+      this.errorMessage = 'Password is required.';
+      return;
+    }
+
     this._auth.login(this.author)
       .subscribe(
-        res => {
-          this.token = res;
-          console.log(this.token.token);
-          localStorage.setItem('token', this.token.token);
-          this.router.navigate(['/home']);
+        response => {
+          console.log('Registration response:', response);
+          if (response.status === 200) {
+            console.log(response.body.message);
+            localStorage.setItem('token', response.body.token);
+            this.router.navigate(['/home']);
+          } else {
+            console.log('Unexpected response status:', response.status);
+            this.errorMessage =   response.body.message;
+          }
         },
-        err => {
-          console.log(err);
-          this.errorMessage = err.error.message || 'An error occurred during login. Please try again.'; // Set the error message
+        error => {
+          console.log('Registration error:', error);
+          this.errorMessage = error.error.message || 'An error occurred during registration. Please try again.';
         }
       );
   }

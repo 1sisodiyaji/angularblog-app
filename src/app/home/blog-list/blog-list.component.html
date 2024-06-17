@@ -2,7 +2,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
-          <h2 class="section-title text-success">Recent posts
+          <h2 class="section-title text-dark">Recent posts
           </h2>
         </div>
       </div>
@@ -12,7 +12,7 @@
             <div class="card-body">
               <a class="d-block text-warning" [routerLink]="['/article' , item._id]" title="user ">
                 <div class="post-image position-relative">
-                  <img class="w-100 h-auto rounded" src="assets/article/{{item.image}}" alt="article image" width="970" height="500">
+                  <img class="w-100 h-auto rounded" src="{{item.image}}" alt="article image" width="970" height="500">
                 </div>
               </a>
               <ul class="card-meta list-inline mb-3">
@@ -24,7 +24,7 @@
               </ul>
               <a class="d-block" [routerLink]="['/article' , item._id]"
                 title="The AGI hype train is running out of steam">
-                <h3 class="mb-3 text-warning">
+                <h3 class="mb-3 text-dark">
                   {{item.title}}
                 </h3>
               </a>

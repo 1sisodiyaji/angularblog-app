@@ -20,7 +20,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SendEmailComponent } from './send-email/send-email.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { EditBlogComponent } from './edit-blog/edit-blog.component'; 
+import { EditBlogComponent } from './edit-blog/edit-blog.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminloginComponent } from './adminlogin/adminlogin.component'; 
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { EditBlogComponent } from './edit-blog/edit-blog.component';
     BlogListComponent,
     SendEmailComponent,
     EditProfileComponent,
-    EditBlogComponent
+    EditBlogComponent,
+    AdminComponent,
+    AdminloginComponent
   ],
   imports: [
     BrowserModule,

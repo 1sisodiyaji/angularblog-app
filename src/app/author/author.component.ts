@@ -21,6 +21,7 @@ export class AuthorComponent implements OnInit {
       this._auth.getById(userId)
         .subscribe(
           (res) => { 
+            console.log(res);
             this.author = res; 
           },
           (error) => {
@@ -32,7 +33,7 @@ export class AuthorComponent implements OnInit {
     }
 
 
-    this.data.getArticleByIdAuthor(this.id)
+    this.data.getArticleByIdAuthor(userId)
     .subscribe(
        res =>{
         this.articles = res;
@@ -60,4 +61,7 @@ export class AuthorComponent implements OnInit {
     );
   }
 }
+
+
+
 }

@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import {  catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +10,27 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  createurl = 'http://localhost:8081/articles/create';
+  createurl = 'http://localhost:8081/articles/createarticle';
   fetchAll = 'http://localhost:8081/articles/all';
   fetchbyIdAuthor = 'http://localhost:8081/articles/getbyidAuthor/';
   fetchbyId = 'http://localhost:8081/articles/getbyid/';
   mailurl = 'http://localhost:8081/send-email'; 
 
-  create(article: any) {
-    return this.http.post(this.createurl, article);
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Unknown error!';
+    if (error.error instanceof ErrorEvent) { 
+      errorMessage = `Error: ${error.error.message}`;
+    } else { 
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(errorMessage);
+  }
+
+  create(article:any): Observable<any> {
+    return this.http.post<any>(this.createurl, article, { observe: 'response' })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   getAll() {
@@ -24,11 +38,15 @@ export class DataService {
   }
 
   getArticleByIdAuthor(id: any) {
+    console.log(id);
     return this.http.get(this.fetchbyIdAuthor + id);
   }
 
-  getArticleById(id: any) {
-    return this.http.get(this.fetchbyId + id);
+  getArticleById(id:any): Observable<any> {
+    return this.http.get<any>(`http://localhost:8081/articles/getbyid/${id}`, { observe: 'response' })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   sendEmail(emailData: any): Observable<any> {
@@ -37,7 +55,7 @@ export class DataService {
 
   deleteArticle(id: string): Observable<any> {
     console.log(id);
-    return this.http.delete(`http://localhost:8081/user/delete/${id}`);
+    return this.http.delete(`http://localhost:8081/articles/delete/${id}`);
   }
 
  

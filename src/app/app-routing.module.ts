@@ -13,6 +13,8 @@ import { AuthGuard } from './services/auth.guard';
 import { SendEmailComponent } from './send-email/send-email.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component'; 
 import { EditBlogComponent } from './edit-blog/edit-blog.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
 
 const routes: Routes = [
 
@@ -21,6 +23,8 @@ const routes: Routes = [
 {path : 'home' , component : HomeComponent},
 {path : 'article/:id' , component : DetailsComponent},
 {path : 'create' ,canActivate :[AuthGuard], component : CreatearticleComponent},
+{path : 'Admin' , component : AdminComponent},
+{path : 'AdminLogin' , component : AdminloginComponent},
 {path : 'about' , component : AboutComponent},
 {path : 'edit-profile/:id' , component : EditProfileComponent}, 
 {path : 'edit-blog/:id' , component : EditBlogComponent}, 

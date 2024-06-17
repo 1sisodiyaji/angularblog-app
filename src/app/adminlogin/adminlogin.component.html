@@ -1,0 +1,23 @@
+<div class="container-fluid py-lg-5 py-3 ">
+    <h2 class="text-center text-warning">Admin Login</h2>
+    <div class="container d-flex justify-content-center align-items-center">
+    <div class="card p-lg-5 p-3 rounded-8" style="width: 450px; background-color: #1e1e1e;">
+    <form (submit)="login()">
+
+        <div class="row my-2">
+            <div class="col-3"> <label for="email">email:</label></div>
+       <div class="col-9"><input type="email" class="bg-transparent w-100 rounded-8 border text-light" id="email" [(ngModel)]="email" name="email"></div>
+        </div>
+
+       <div class="row my-2">
+       <div class="col-3"> <label for="password">password:</label></div>
+       <div class="col-9"><input type="password" class="bg-transparent w-100 rounded-8 border text-light" id="password" [(ngModel)]="password" name="password"></div> 
+      </div>
+
+      <button type="submit" class="btn border border-warning">Login</button>
+      <p *ngIf="errorMessage">{{ errorMessage }}</p>
+    </form>
+</div>
+</div>
+  </div>
+  

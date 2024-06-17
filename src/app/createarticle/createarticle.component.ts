@@ -19,6 +19,7 @@ export class CreatearticleComponent implements OnInit {
     idAuthor: ''
   }
   tag: any = '';
+  errorMessage: string | null = null;
   image: any;
   select(e: any) {
     this.image = e.target.files[0];
@@ -28,26 +29,34 @@ export class CreatearticleComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   create() {
-    console.log("entered" +  this._auth.getAuthorDataFromToken().id);
     let fd = new FormData;
     fd.append('title', this.article.title);
     fd.append('content', this.article.content);
     fd.append('tags', JSON.stringify(this.article.tags));
     fd.append('description', this.article.description);
     fd.append('image', this.image);
-    fd.append('idAuthor', this._auth.getAuthorDataFromToken().id);
+    fd.append('idAuthor', this._auth.getIdforfrontend());
 
     console.log("entered"+ fd);
     this.data.create(fd)
-      .subscribe(
-        res => {
+    .subscribe(
+      response => {
+        console.log('Article response:', response);
+        if (response.status === 200) {
+          console.log(response.body.message);
           this.router.navigate(['/home']);
-        },
-        err => {
-          console.log(err);
+        } else {
+          console.log('Unexpected response status:', response.status);
+          this.errorMessage =   response.body.message;
         }
-      )
+      },
+      error => {
+        console.log('Article error:', error);
+        this.errorMessage = error.error.message || 'An error occurred during registration. Please try again.';
+      }
+    );
   }
 
 }

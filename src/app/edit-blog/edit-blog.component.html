@@ -9,7 +9,7 @@
         <input [(ngModel)]="tag" type="text" class="form-control w-75" placeholder="Tag">
         <button class="btn btn-primary w-25" (click)="addTag()">Add</button>
       </div>
-      <img src="assets/article/{{article.image}}" alt="article image">
+      <img src="{{article.image}}" alt="article image">
       <input type="file" accept="image/*" (change)="select($event)" class="form-control m-1" placeholder="Image">
       <textarea [(ngModel)]="article.description" cols="30" rows="4" placeholder="Description" class="form-control m-1"></textarea>
       <textarea [(ngModel)]="article.content" rows="4" placeholder="Content" class="w-100 form-control m-1"></textarea>

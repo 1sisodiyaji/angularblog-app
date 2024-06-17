@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+    overflow-x: hidden; /* Disable scroll bar */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    background-color: #262626; /* Background color */
+    color: white; /* Text color */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* For older versions of IE (up to IE9), you might want to apply a separate hack */
+body::-webkit-scrollbar {
+    display: none; /* Hide scrollbar in WebKit-based browsers like Chrome and Safari */
+}

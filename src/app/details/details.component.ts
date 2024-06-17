@@ -18,11 +18,17 @@ article :any;
     this.id =  this.act.snapshot.paramMap.get('id');
     this.data.getArticleById(this.id)
     .subscribe(
-      res =>{
-this.article = res;
+      response => {
+        console.log('Registration response:', response);
+        if (response.status === 200) {
+          console.log(response.body);
+          this.article = response.body;
+        } else {
+          console.log('Unexpected response status:', response.status);
+        }
       },
-      err=>{
-        console.log(err);
+      error => {
+        console.log('Fetching error:', error);
       }
     )
   }
