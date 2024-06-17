@@ -10,11 +10,11 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  createurl = 'http://localhost:8081/articles/createarticle';
-  fetchAll = 'http://localhost:8081/articles/all';
-  fetchbyIdAuthor = 'http://localhost:8081/articles/getbyidAuthor/';
-  fetchbyId = 'http://localhost:8081/articles/getbyid/';
-  mailurl = 'http://localhost:8081/send-email'; 
+  createurl = 'https://backendangularblogapp.onrender.com/articles/createarticle';
+  fetchAll = '';
+  fetchbyIdAuthor = 'https://backendangularblogapp.onrender.com/articles/getbyidAuthor/';
+  fetchbyId = 'https://backendangularblogapp.onrender.com/articles/getbyid/';
+  mailurl = 'https://backendangularblogapp.onrender.com/send-email'; 
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';
@@ -33,8 +33,13 @@ export class DataService {
       );
   }
 
-  getAll() {
-    return this.http.get(this.fetchAll);
+ 
+  
+  getAll(): Observable<any> {
+    return this.http.get<any>(`https://backendangularblogapp.onrender.com/articles/all`, { observe: 'response' })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   getArticleByIdAuthor(id: any) {
@@ -43,7 +48,7 @@ export class DataService {
   }
 
   getArticleById(id:any): Observable<any> {
-    return this.http.get<any>(`http://localhost:8081/articles/getbyid/${id}`, { observe: 'response' })
+    return this.http.get<any>(`https://backendangularblogapp.onrender.com/articles/getbyid/${id}`, { observe: 'response' })
       .pipe(
         catchError(this.handleError)
       );
@@ -55,13 +60,13 @@ export class DataService {
 
   deleteArticle(id: string): Observable<any> {
     console.log(id);
-    return this.http.delete(`http://localhost:8081/articles/delete/${id}`);
+    return this.http.delete(`https://backendangularblogapp.onrender.com/articles/delete/${id}`);
   }
 
  
   
   updateArticle(id: string, formData: FormData): Observable<any> {
-    return this.http.put<any>(`http://localhost:8081/articles/update/${id}`, formData)
+    return this.http.put<any>(`https://backendangularblogapp.onrender.com/articles/update/${id}`, formData)
        
   }
 }

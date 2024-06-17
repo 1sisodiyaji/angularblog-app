@@ -10,7 +10,7 @@
         <div *ngFor = "let item of articles " class="col-lg-6">
           <article class="card post-card h-100 border-0 bg-transparent">
             <div class="card-body">
-              <a class="d-block text-warning" [routerLink]="['/article' , item._id]" title="user ">
+              <a class="d-block text-dark" [routerLink]="['/article' , item._id]" title="user ">
                 <div class="post-image position-relative">
                   <img class="w-100 h-auto rounded" src="{{item.image}}" alt="article image" width="970" height="500">
                 </div>

@@ -46,9 +46,8 @@ export class AuthorComponent implements OnInit {
   }
 
   deleteArticle(id: string): void {
-    if (confirm('Are you sure you want to delete your profile?')) {
-    const userId = this._auth.getIdforfrontend(); 
-    this.data.deleteArticle(userId)
+    if (confirm('Are you sure you want to delete your profile?')) { 
+    this.data.deleteArticle(id)
     .subscribe(
       (res) => {
         console.log('Article deleted successfully'); 

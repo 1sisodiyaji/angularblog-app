@@ -29,8 +29,8 @@ export class AuthService {
   }
 
 
-  private registerUrl = 'http://localhost:8081/user/register';
-  private loginUrl = 'http://localhost:8081/user/login';
+  private registerUrl = 'https://backendangularblogapp.onrender.com/user/register';
+  private loginUrl = 'https://backendangularblogapp.onrender.com/user/login';
 
 
   constructor(private http: HttpClient , private router: Router) { }
@@ -121,11 +121,11 @@ getIdforfrontend() {
 
 getById(id: any) {
   console.log(id);
-  return this.http.get(`http://localhost:8081/user/getbyid/${id}`);
+  return this.http.get(`https://backendangularblogapp.onrender.com/user/getbyid/${id}`);
 }
 
 updateProfile(id: string, formData: FormData): Observable<any> {
-  const url = `http://localhost:8081/user/update/${id}`;  
+  const url = `https://backendangularblogapp.onrender.com/user/update/${id}`;  
   return this.http.put<any>(url, formData)
     .pipe(
       catchError(this.handleError) 
@@ -134,7 +134,7 @@ updateProfile(id: string, formData: FormData): Observable<any> {
 
 
 deleteProfile(userId: string): Observable<any> {
-  return this.http.delete(`http://localhost:8081/user/delete/${userId}`);
+  return this.http.delete(`https://backendangularblogapp.onrender.com/user/delete/${userId}`);
 }
 
 

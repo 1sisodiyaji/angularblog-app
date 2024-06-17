@@ -15,13 +15,18 @@ export class BlogListComponent implements OnInit {
   ngOnInit(): void {
     this.data.getAll()
       .subscribe(
-        res => {
-          this.articles = res;
+        response => {
+          console.log('Registration response:', response);
+          if (response.status === 200) {
+            this.articles = response.body;
+            console.log(response.body);  
+          } else {
+            console.log('Unexpected response status:', response.status); 
+          }
         },
-        err => {
-          console.log(err);
+        error => {
+          console.log('Registration error:', error); 
         }
-
       );
 
   }
